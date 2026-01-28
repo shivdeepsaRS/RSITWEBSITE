@@ -41,23 +41,7 @@ const Achievements = () => {
           </div>
         </div>
         
-        <div className="row mb-5">
-          <div className="col-12">
-            <h4 className="text-center mb-4">{t('videosTitle')}</h4>
-            <div className="row g-4">
-              <div className="col-lg-6" data-aos="fade-right">
-                <div className="ratio ratio-16x9">
-                  <iframe src="https://www.youtube.com/embed/d4aNfN_8FPM" title="Agricultural Technology" allowFullScreen></iframe>
-                </div>
-              </div>
-              <div className="col-lg-6" data-aos="fade-left">
-                <div className="ratio ratio-16x9">
-                  <iframe src="https://www.youtube.com/embed/7wI_V3cK-qM" title="Smart Farming" allowFullScreen></iframe>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+
         
         <div className="row">
           <div className="col-12">

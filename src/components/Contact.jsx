@@ -14,11 +14,46 @@ const Contact = () => {
 
   const handleChange = (e) => {
     const { id, value, type, checked } = e.target;
+    
+    // Mobile number validation: strict numeric input, max 10 digits
+    if (id === 'mobile') {
+      const numericValue = value.replace(/\D/g, '').slice(0, 10);
+      setFarmerData({ ...farmerData, [id]: numericValue });
+      return;
+    }
+
     setFarmerData({ ...farmerData, [id]: type === 'checkbox' ? checked : value });
+  };
+
+  const validateForm = () => {
+    // 1. Name Validation
+    if (farmerData.fullName.trim().length < 2) {
+      toast.error("Please enter a valid full name.");
+      return false;
+    }
+
+    // 2. Mobile Number Validation (Strict 10 digits)
+    if (farmerData.mobile.length !== 10) {
+      toast.error("Please enter a valid 10-digit mobile number.");
+      return false;
+    }
+
+    // 3. Farm Size Validation
+    if (!farmerData.farmSize || parseFloat(farmerData.farmSize) <= 0) {
+      toast.error("Please enter a valid farm size.");
+      return false;
+    }
+
+    return true;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    if (!validateForm()) {
+      return;
+    }
+
     setLoading(true);
 
     // Debugging: Check if keys are loaded
@@ -78,7 +113,7 @@ const Contact = () => {
     { icon: <FaXTwitter />, col: '#000000', link: '#' },
     { icon: <FaYoutube />, col: '#ff0000', link: '#' },
     { icon: <FaLinkedinIn />, col: '#0077b5', link: '#' },
-    { icon: <FaWhatsapp />, col: '#25d366', link: '#' }
+    { icon: <FaWhatsapp />, col: '#25d366', link: 'https://wa.me/919422191210' }
   ];
 
   return (
@@ -98,7 +133,7 @@ const Contact = () => {
               
               <div className="d-flex justify-content-center justify-content-lg-start gap-3 mb-4 flex-wrap">
                 {socialLinks.map((s, i) => (
-                  <a key={i} href={s.link} 
+                  <a key={i} href={s.link} target="_blank" rel="noopener noreferrer"
                      style={{ width:'42px', height:'42px', display:'flex', alignItems:'center', justifyContent:'center', 
                               backgroundColor:s.col, color:'#fff', borderRadius:'50%', textDecoration:'none', fontSize:'22px' }}>
                     {s.icon}
@@ -118,14 +153,18 @@ const Contact = () => {
                   <i className="fas fa-phone text-success me-3 fs-5"></i>
                   <div>
                     <h6 className="mb-0">{t('phoneTitle')}</h6>
-                    <p className="text-muted mb-0">{t('phone')}</p>
+                    <a href="tel:+919422191210" className="text-muted mb-0 text-decoration-none hover-text-success transition-all">
+                      {t('phone')}
+                    </a>
                   </div>
                 </div>
                 <div className="d-flex align-items-center">
                   <i className="fas fa-envelope text-success me-3 fs-5"></i>
                   <div>
                     <h6 className="mb-0">{t('emailTitle')}</h6>
-                    <p className="text-muted mb-0">{t('email')}</p>
+                    <a href="mailto:royal1shetkari@gmail.com" className="text-muted mb-0 text-decoration-none hover-text-success transition-all">
+                      {t('email')}
+                    </a>
                   </div>
                 </div>
               </div>
