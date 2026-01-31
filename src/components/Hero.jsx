@@ -8,7 +8,7 @@ const Hero = () => {
   return (
     <section id="home" className="hero-section">
       <div className="hero-overlay"></div>
-      <div className="container h-100">
+      <div className="container h-100 position-relative" style={{ zIndex: 2 }}>
         <div className="row h-100 align-items-center">
           <motion.div 
             className="col-12 text-center text-white"
